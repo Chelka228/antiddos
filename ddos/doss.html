@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Russia Protect</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: url('https://github.com/Chelka228/AssetsCryptoRussia/raw/main/ddos.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .captcha {
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .captcha input {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .captcha button {
+            padding: 10px 20px;
+            background: yellow;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .captcha button:hover {
+            background: orange;
+        }
+
+        .message {
+            color: yellow;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="header">CryptoRussiaProtect</div>
+
+        <div class="captcha">
+            <p id="captchaText"></p>
+            <input type="text" id="captchaInput" placeholder="Введите капчу" required>
+            <button id="captchaButton">Подтвердить</button>
+            <p id="captchaMessage" class="message"></p>
+        </div>
+    </div>
+
+    <script>
+        const captchaText = document.getElementById('captchaText');
+        const captchaInput = document.getElementById('captchaInput');
+        const captchaButton = document.getElementById('captchaButton');
+        const captchaMessage = document.getElementById('captchaMessage');
+
+        function generateCaptcha() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            captchaText.textContent = captcha;
+            return captcha;
+        }
+
+        let generatedCaptcha = generateCaptcha();
+
+        captchaButton.addEventListener('click', () => {
+            if (captchaInput.value === generatedCaptcha) {
+                window.location.href = 'main.html'; // Ссылка на основную страницу
+            } else {
+                captchaMessage.textContent = 'Неверная капча! Попробуйте снова!';
+                generatedCaptcha = generateCaptcha(); // Генеруємо нову капчу
+                captchaInput.value = ''; // Очищаємо поле вводу
+            }
+        });
+    </script>
+</body>
+</html>
